@@ -1,6 +1,6 @@
 // @flow
 import React, { useState, useEffect } from 'react';
-import { View } from 'react-native';
+import { View ,Text} from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
 import barcodes from 'jsbarcode/src/barcodes';
@@ -76,7 +76,7 @@ type Props = {|
 |};
 
 const Barcode = (props: Props) => {
-  const { format, value, lineColor, flat } = props;
+  const { format, value, lineColor, flat,text,textStyle } = props;
   const { style, ...barcodeProps } = props;
   const [bars, setBars] = useState([]);
   const [barCodeWidth, setBarCodeWidth] = useState(0);
@@ -102,6 +102,8 @@ const Barcode = (props: Props) => {
       >
         <Path d={bars.join(' ')} />
       </Svg>
+      {text !=='' && 
+        <Text style={textStyle}>{text}</Text>}
     </View>
   );
 };
@@ -111,6 +113,8 @@ export default Barcode;
 Barcode.defaultProps = {
   style: {},
   value: undefined,
+  text:'',
+  textStyle:{},
   format: 'CODE128',
   lineColor: '#000000',
   flat: false,
